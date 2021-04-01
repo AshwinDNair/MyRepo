@@ -1,25 +1,44 @@
 package aphorism2;
-
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.io.File;  // Import the File class
+import java.io.FileNotFoundException;  // Import this class to handle errors
+import java.util.Scanner; // Import the Scanner class to read text files
+
+
 
 public class Patients {
     private static CopyOnWriteArrayList<Patient> patients;
     private static AtomicInteger id;
 
     static {
-		
 	patients = new CopyOnWriteArrayList<Patient>();
-	id = new AtomicInteger();
-	add("Patient1","CCS1");
-	add("Patient2","CCS2");
-	add("Patient3","CCS3");
-	add("Patient4","CCS4");
-	add("Patient5","CCS5");
-	add("Patient6","CCS6");
-	
+	try{
+
+	populate();		
+		}
+	catch( Exception err){
+		System.out.println(err);
+		
+	}
     }
 
+  public static void populate() { 
+    try {
+      File myObj = new File("/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/patients.db");
+      Scanner myReader = new Scanner(myObj);
+      while (myReader.hasNextLine()) {
+        String record = myReader.nextLine();
+        String[] parts = record.split("!");
+		add(Integer.parseInt(parts[0]),parts[1],parts[2],Integer.parseInt(parts[3]));
+      }
+      myReader.close();
+    } catch (FileNotFoundException e) {
+      System.out.println("An error occurred.");
+      e.printStackTrace();
+    }
+  }
+     
     public static String toPlain() {
 	String retval = "";
 	int i = 1;
@@ -42,12 +61,13 @@ public class Patients {
     }
 
     // Support POST operation.
-    public static void add(String name,String insuranceNum) {
-	int localId = id.incrementAndGet();
+    public static void add(int Id,String name,String insuranceNum,int docterId) {
 	Patient patient = new Patient();
 	patient.setName(name);
 	patient.setInsuranceNumber(insuranceNum);
-	patient.setId(localId);
+	patient.setId(Id);
+	patient.setDoctorId(docterId);
 	patients.add(patient);
     }
 }
+

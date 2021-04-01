@@ -10,12 +10,12 @@ import org.w3c.dom.Element;
 import org.restlet.data.Status;
 import org.restlet.data.MediaType;
 import java.util.List;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 public class XmlOneResource extends ServerResource {
     public XmlOneResource() { }
 
     @Get
-    public Representation toXml() {
+    public Representation toIndividualXml() {
 	// Extract the friend's id.
 	String sid = (String) getRequest().getAttributes().get("id");
 	if (sid == null) return badRequest("No ID provided\n");
@@ -27,9 +27,32 @@ public class XmlOneResource extends ServerResource {
 	catch(Exception e) { return badRequest("No such ID\n"); }
 
 	// Search for the Friend.
-	List<Doctor> list = Doctors.getList();
-	Doctor doctor = Doctors.find(id);
-	if (doctor == null) return badRequest("No doctor with ID " + id + "\n");
+//	List<Doctor> list = Doctors.getList();
+//	Doctor doctor = Doctors.find(id);
+//	if (doctor == null) return badRequest("No doctor with ID " + id + "\n");
+CopyOnWriteArrayList<Doctor> doctors;
+CopyOnWriteArrayList<Patient> patients;
+String output="";
+      doctors = Doctors.getList();
+      patients = Patients.getList();
+	for (Doctor a : doctors) {
+        if(a.getId()==id){
+        output=output+a.getName()+" -- ";
+	   	  	for (Patient p : patients) {
+               if(a.getId()==p.getDoctorId()){
+          
+                       output=output+p.getId()+":"+p.getName()+"==>"+p.getInsuranceNumber()+"\t";
+                       
+  
+                     
+               }
+	  
+	}
+    output=output+"\n";
+        }
+       
+	}	
+
 
 	// Generate the XML response.
 	DomRepresentation dom = null;  
@@ -39,7 +62,7 @@ public class XmlOneResource extends ServerResource {
             Document doc = dom.getDocument();  
   
             Element root = doc.createElement("doctor");  
-	    root.appendChild(doc.createTextNode(doctor.toString()));
+	    root.appendChild(doc.createTextNode(output));
 	    doc.appendChild(root);
 	}
 	catch(Exception e) { }

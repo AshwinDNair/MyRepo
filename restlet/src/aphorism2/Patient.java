@@ -11,7 +11,7 @@ public class Patient {
     // overrides
     @Override
     public String toString() {
-	return String.format("%2d: ", patientId) + patientName + " has the insurance number: " + insuranceNum;
+	return String.format("%2d: ", patientId) + patientName + " has the insurance number: " + insuranceNum+"consults with docter id"+doctorId;
     }
     
     // properties

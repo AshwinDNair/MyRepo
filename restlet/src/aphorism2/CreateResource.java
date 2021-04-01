@@ -19,6 +19,7 @@ public class CreateResource extends ServerResource {
 	// Extract the data from the POST body.
 	Form form = new Form(data);
 	String name = form.getFirstValue("name");
+	int id=0;
 	int patientNum = 0;
 	if (name == null) {
 	    msg = "No name was given.\n";
@@ -27,10 +28,16 @@ public class CreateResource extends ServerResource {
 		else if (form.getFirstValue("patientNum") == null) {
 	    msg = "No number of patients was given.\n";
 	    status = Status.CLIENT_ERROR_BAD_REQUEST;
+	
 	}
+		else if (form.getFirstValue("patientNum") == null) {
+	    msg = "No docter id was given.\n";
+	    status = Status.CLIENT_ERROR_BAD_REQUEST;
+		}
 	else {
 		patientNum=Integer.parseInt(form.getFirstValue("patientNum"));
-	    Doctors.add(name,patientNum);
+		id=Integer.parseInt(form.getFirstValue("id"));
+	    Doctors.add(id,name,patientNum);
 	    msg = name + "' has been added.\n";
 	    status = Status.SUCCESS_OK;
 	}
