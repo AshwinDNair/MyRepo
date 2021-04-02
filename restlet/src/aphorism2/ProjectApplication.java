@@ -7,7 +7,7 @@ import org.restlet.Response;
 import org.restlet.routing.Router;
 import org.restlet.data.Status;
 import org.restlet.data.MediaType;
-
+import java.util.concurrent.CopyOnWriteArrayList;
 public class ProjectApplication extends Application {
     @Override
     public synchronized Restlet createInboundRoot() {
@@ -31,13 +31,14 @@ public class ProjectApplication extends Application {
 		    catch(Exception e) { msg = badRequest("Ill-formed ID.\n"); }
 
 		    Doctor doctor = Doctors.find(id);
-			// for(Patient patient : Patients) { 
-   			// 	if(patient.getDoctorId()==(doctor.getId())) { 
-       		// 			//found it!
-			// 			   	Patients.getList().remove(patient);
-   			// 	}
-			// }
-			//Patients  patient =Patients.doctorId.find(id);
+			CopyOnWriteArrayList<Patient> patients = Patients.getList();
+			for(Patient patient : patients) { 
+   				if(patient.getDoctorId()==(doctor.getId())) { 
+       					//found it!
+						   	Patients.getList().remove(patient);
+   				}
+			}
+			
 		    if (doctor == null) 
 			msg = badRequest("No doctor with ID " + id + "\n");
 		    else {
@@ -56,7 +57,6 @@ public class ProjectApplication extends Application {
     router.attach("/",            PlainResource.class);
 	router.attach("/xml",         XmlAllResource.class);	
 	router.attach("/xml/{id}",    XmlOneResource.class);
-	router.attach("/json",        JsonAllResource.class);
 	router.attach("/create",      CreateResource.class);
 	router.attach("/update",      UpdateResource.class);
 	router.attach("/delete/{id}", janitor); // instance of Doctor class

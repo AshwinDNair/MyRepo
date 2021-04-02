@@ -20,8 +20,8 @@ public class UpdateResource extends ServerResource {
 	Form form = new Form(data);
 	String sid = form.getFirstValue("id");
 	String name = form.getFirstValue("name");
-	if (sid == null || name == null||form.getFirstValue("patientsCount") == null) {
-	    msg = "An ID,new name and new rank must be provided.\n";
+	if (sid == null || name == null) {
+	    msg = "An ID and new name  must be provided.\n";
 	    status = Status.CLIENT_ERROR_BAD_REQUEST;
 	}
 	else {
@@ -33,8 +33,7 @@ public class UpdateResource extends ServerResource {
 	    }
 	    else {
 			int patientsCount = Integer.parseInt(form.getFirstValue("patientsCount"));
-		//Doctor.setName(name);
-		//Doctor.setPatientCount(patientsCount);
+			doctor.setName(name);
 		msg = "Id: " + id + " has been updated to '" + name + "'.\n";
 		status = Status.SUCCESS_OK;
 	    }

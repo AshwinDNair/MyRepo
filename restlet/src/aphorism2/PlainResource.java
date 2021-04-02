@@ -36,14 +36,7 @@ CopyOnWriteArrayList<Patient> patients;
 	return new StringRepresentation(output, MediaType.TEXT_PLAIN);
     }
 
-    //  @Get
-    // public Representation toPlain() {
-	// String doctors = Doctors.toPlain();
-    // String patients = Patients.toPlain();
-    // String output=doctors+patients;
-	// setStatus(Status.SUCCESS_OK);
-	// return new StringRepresentation(output, MediaType.TEXT_PLAIN);
-    // }
+   
 }
 
 

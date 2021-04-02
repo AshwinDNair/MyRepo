@@ -26,7 +26,7 @@ public class DoctorPatient {
     public static Element getOneXml(Doctor d){
         DomRepresentation dom = null; 
                 try {  
-        dom = new DomRepresentation(MediaType.TEXT_XML);  
+            dom = new DomRepresentation(MediaType.TEXT_XML);  
 	    dom.setIndenting(true);
             Document doc = dom.getDocument();  
 			Element root = doc.createElement("doctor"); 
@@ -53,8 +53,14 @@ public class DoctorPatient {
     return root;
         
 	}
-	catch(Exception e) {  }
+	catch(Exception e) { 
+
+  
+    }
+	//return dom;
     return root1;
     }
     }
-    
+    // public Element getAllXml(){
+
+    // }
