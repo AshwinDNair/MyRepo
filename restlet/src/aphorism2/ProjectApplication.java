@@ -46,20 +46,8 @@ public class ProjectApplication extends Application {
 					msg = badRequest("No doctor with ID " + id + "\n");
 				else {
 					Doctors.getList().remove(doctor);
-
-					// try {
-					// 	FileWriter fw = new FileWriter(file.getAbsoluteFile());
-					// 	BufferedWriter bw = new BufferedWriter(fw);
-					// 	for (Doctor d : Doctors.getList()) {
-					// 		output = d.getName();
-					// 	}
-
-					// 	bw.write(test);
-					// 	bw.close();
-					// } catch (Exception e) {
-
-					// }
-
+					DoctorPatientUtil.writeDoctorFile();
+					DoctorPatientUtil.writePatientFile();
 					msg = "Doctor with Id:" + id + " removed.\n";
 				}
 

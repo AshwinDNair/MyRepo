@@ -11,6 +11,9 @@ import org.restlet.data.Status;
 import org.restlet.data.MediaType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.BufferedWriter;
 
 public class DoctorPatientUtil {
     private static CopyOnWriteArrayList<Doctor> doctors = Doctors.getList();
@@ -70,11 +73,38 @@ public class DoctorPatientUtil {
         return root1;
     }
 
-    public static void writeFile(){
-        
+    public static void writeDoctorFile() {
+        String output = null;
+        File file = new File(
+                "/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/drs.db");
+        try {
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Doctor d : Doctors.getList()) {
+                output = d.getId() + "!" + d.getName() + "!" + d.getPatientCount() + "\n";
+                bw.write(output);
+            }
+            bw.close();
+        } catch (Exception e) {
+
+        }
     }
-    public static void readFile(){
-        
+        public static void writePatientFile() {
+            String output = null;
+            File file = new File(
+                    "/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/patients.db");
+            try {
+                FileWriter fw = new FileWriter(file);
+                BufferedWriter bw = new BufferedWriter(fw);
+                for (Patient p : Patients.getList()) {
+
+                    output = p.getId() + "!" + p.getName() + "!" + p.getInsuranceNumber() + "!"+p.getDoctorId()+"\n";
+                    bw.write(output);
+                }
+                bw.close();
+            } catch (Exception e) {
+    
+            }
     }
 
 }
