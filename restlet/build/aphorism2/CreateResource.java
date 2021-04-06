@@ -35,9 +35,20 @@ public class CreateResource extends ServerResource {
 	    status = Status.CLIENT_ERROR_BAD_REQUEST;
 		}
 	else {
+		int patientId=0;
+		String patientName="";
+		String insuranceNumber="";
 		patientNum=Integer.parseInt(form.getFirstValue("patientNum"));
 		id=Integer.parseInt(form.getFirstValue("id"));
-	    Doctors.add(id,name,patientNum);
+		Doctors.add(id,name,patientNum);
+		DoctorPatientUtil.writeDoctorFile();
+		for(int i=0;i<patientNum;i++){
+			 patientId = Integer.parseInt(form.getFirstValue("patientid"+(i+1)));
+			 patientName = form.getFirstValue("patientname"+(i+1));
+			 insuranceNumber = form.getFirstValue("insurancenumber"+(i+1));
+			 Patients.add(patientId, patientName, insuranceNumber, id);
+		}
+		DoctorPatientUtil.writePatientFile();
 	    msg = name + "' has been added.\n";
 	    status = Status.SUCCESS_OK;
 	}
