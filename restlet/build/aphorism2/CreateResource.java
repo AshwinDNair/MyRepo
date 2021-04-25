@@ -49,7 +49,7 @@ public class CreateResource extends ServerResource {
 			 Patients.add(patientId, patientName, insuranceNumber, id);
 		}
 		DoctorPatientUtil.writePatientFile();
-	    msg = name + "' has been added.\n";
+	    msg = name + " has been added.\n";
 	    status = Status.SUCCESS_OK;
 	}
 

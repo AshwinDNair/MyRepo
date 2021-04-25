@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.io.File;  // Import the File class
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.Scanner; // Import the Scanner class to read text files
-
+//import java.nio.file.Paths;
 
 
 public class Patients {
@@ -25,7 +25,10 @@ public class Patients {
 
   public static void populate() { 
     try {
-      File myObj = new File("/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/patients.db");
+    //  String path = Paths.get("").toAbsolutePath().toString();
+     // System.out.println("Working Directory = ======================" + path);
+      File myObj = new File("../webapps/drpatient/WEB-INF/data/patients.db");
+      //File myObj = new File("/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/patients.db");
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String record = myReader.nextLine();

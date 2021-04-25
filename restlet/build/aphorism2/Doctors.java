@@ -24,7 +24,8 @@ public class Doctors {
 
   public static void populate() { 
     try {
-      File myObj = new File("/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/drs.db");
+      
+      File myObj = new File("../webapps/drpatient/WEB-INF/data/drs.db");
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String record = myReader.nextLine();
