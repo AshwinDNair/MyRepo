@@ -20,13 +20,7 @@ public class DoctorPatientUtil {
     private static CopyOnWriteArrayList<Patient> patients = Patients.getList();
     private static Element root1;
 
-    public DoctorPatientUtil() {
-    }
-
-    public void setDocterPatientList() {
-
-    }
-
+    
     public static Element getOneXml(Doctor d, Document doc) {
         try {
             Element root = doc.createElement("doctor");
@@ -76,7 +70,7 @@ public class DoctorPatientUtil {
     public static void writeDoctorFile() {
         String output = null;
         File file = new File(
-                "/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/drs.db");
+                "../webapps/drpatient/WEB-INF/data/drs.db");
         try {
             FileWriter fw = new FileWriter(file);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -92,7 +86,7 @@ public class DoctorPatientUtil {
         public static void writePatientFile() {
             String output = null;
             File file = new File(
-                    "/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/aphorism2/patients.db");
+                    "../webapps/drpatient/WEB-INF/data/patients.db");
             try {
                 FileWriter fw = new FileWriter(file);
                 BufferedWriter bw = new BufferedWriter(fw);

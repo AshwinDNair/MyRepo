@@ -59,6 +59,10 @@ public class ProjectApplication extends Application {
 		// Create the routing table.
 		Router router = new Router(getContext());
 		router.attach("/", PlainResource.class);
+		router.attach("/doctors", PlainResourceDoctor.class);
+		router.attach("/patients", PlainResourcePatient.class);
+		router.attach("/doctors/{id}", PlainOneResourceDoctor.class);
+		router.attach("/patients/{id}", PlainOneResourcePatient.class);
 		router.attach("/xml", XmlAllResource.class);
 		router.attach("/xml/{id}", XmlOneResource.class);
 		router.attach("/create", CreateResource.class);
