@@ -31,7 +31,7 @@ public class XmlAllResource extends ServerResource {
 			dom = new DomRepresentation(MediaType.TEXT_XML);
 			dom.setIndenting(true);
 			Document doc = dom.getDocument();
-			Element root = DoctorPatientUtil.getAllXml(doc);
+			Element root = DoctorPatientUtil.getAllXml(doc,false);
 			// root.appendChild(root1);
 			doc.appendChild(root);
 		} catch (Exception e) {

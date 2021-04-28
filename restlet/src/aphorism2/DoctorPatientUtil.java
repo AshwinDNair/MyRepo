@@ -20,29 +20,40 @@ public class DoctorPatientUtil {
     private static CopyOnWriteArrayList<Patient> patients = Patients.getList();
     private static Element root1;
 
-    
-    public static Element getOneXml(Doctor d, Document doc) {
+
+    public static Element getPatientXml(Patient p,Document doc){
+        Element rootNewPatient = doc.createElement("patient");
+        Element rootPatientName = doc.createElement("name");
+        Element rootInsuranceNo = doc.createElement("insuranceNo");
+        rootPatientName.appendChild(doc.createTextNode(p.getName()));
+        rootInsuranceNo.appendChild(doc.createTextNode(p.getInsuranceNumber()));
+        rootNewPatient.appendChild(rootPatientName);
+        rootNewPatient.appendChild(rootInsuranceNo);
+        return rootNewPatient;
+    }
+    public static Element getPatientsXml(Doctor d,Document doc){
+        Element rootPatients = doc.createElement("patients");
+        
+        for (Patient p : patients) {
+            if(d==null){
+                rootPatients.appendChild(getPatientXml(p, doc));  
+            }
+            else
+              if (d.getId() == p.getDoctorId()) {
+                rootPatients.appendChild(getPatientXml(p, doc)); 
+            }
+
+        }
+        return rootPatients;
+    }
+    public static Element getOneXml(Doctor d, Document doc,boolean isDoctorOnly) {
         try {
             Element root = doc.createElement("doctor");
             Element rootDocName = doc.createElement("name");
             rootDocName.appendChild(doc.createTextNode(d.getName()));
             root.appendChild(rootDocName);
-            Element rootPatients = doc.createElement("patients");
-            for (Patient p : patients) {
-                if (d.getId() == p.getDoctorId()) {
-                    Element rootNewPatient = doc.createElement("patient");
-                    Element rootPatientName = doc.createElement("name");
-                    Element rootInsuranceNo = doc.createElement("insuranceNo");
-                    rootPatientName.appendChild(doc.createTextNode(p.getName()));
-                    rootInsuranceNo.appendChild(doc.createTextNode(p.getInsuranceNumber()));
-                    rootNewPatient.appendChild(rootPatientName);
-                    rootNewPatient.appendChild(rootInsuranceNo);
-                    rootPatients.appendChild(rootNewPatient);
-
-                }
-
-            }
-            root.appendChild(rootPatients);
+            if(isDoctorOnly==false)
+            root.appendChild(getPatientsXml(d,doc));
             root1 = root;
             return root;
 
@@ -51,12 +62,12 @@ public class DoctorPatientUtil {
         return root1;
     }
 
-    public static Element getAllXml(Document doc) {
+    public static Element getAllXml(Document doc,boolean isDoctorOnly) {
         try {
             Element doctorsRoot = doc.createElement("doctors");
             for (Doctor d : doctors) {
 
-                doctorsRoot.appendChild(getOneXml(d, doc));
+                doctorsRoot.appendChild(getOneXml(d, doc,isDoctorOnly));
             }
 
             root1 = doctorsRoot;

@@ -11,21 +11,8 @@ import org.restlet.data.Status;
 import org.restlet.data.MediaType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-/*
-<doctor>
-	<name></name>
-	<patients>
-		<patient>
-			<name></name>
-			<insuranceNo></insuranceNo>
-		</patient>
-		...
-	</patients>
-</doctor>
-*/
-public class XmlOneResource extends ServerResource {
-	public XmlOneResource() {
+public class XmlOneResourceDoctor extends ServerResource {
+	public XmlOneResourceDoctor() {
 	}
 
 	@Get
@@ -53,7 +40,7 @@ public class XmlOneResource extends ServerResource {
 			dom = new DomRepresentation(MediaType.TEXT_XML);
 			dom.setIndenting(true);
 			Document doc = dom.getDocument();
-			Element root = DoctorPatientUtil.getOneXml(d, doc,false);
+			Element root = DoctorPatientUtil.getOneXml(d, doc,true);
 			// root.appendChild(root1);
 			doc.appendChild(root);
 		} catch (Exception e) {

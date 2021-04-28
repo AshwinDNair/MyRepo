@@ -11,21 +11,8 @@ import org.restlet.data.Status;
 import org.restlet.data.MediaType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-/*
-<doctor>
-	<name></name>
-	<patients>
-		<patient>
-			<name></name>
-			<insuranceNo></insuranceNo>
-		</patient>
-		...
-	</patients>
-</doctor>
-*/
-public class XmlOneResource extends ServerResource {
-	public XmlOneResource() {
+public class XmlOneResourcePatient extends ServerResource {
+	public XmlOneResourcePatient() {
 	}
 
 	@Get
@@ -39,9 +26,9 @@ public class XmlOneResource extends ServerResource {
 
 		int id;
 		id = Integer.parseInt(sid.trim());
-		Doctor d = Doctors.find(id);
+		Patient p = Patients.find(id);
 		try {
-			if (d == null) {
+			if (p == null) {
 				throw new Exception("Invalid Id");
 			}
 		} catch (Exception e) {
@@ -53,7 +40,7 @@ public class XmlOneResource extends ServerResource {
 			dom = new DomRepresentation(MediaType.TEXT_XML);
 			dom.setIndenting(true);
 			Document doc = dom.getDocument();
-			Element root = DoctorPatientUtil.getOneXml(d, doc,false);
+			Element root = DoctorPatientUtil.getPatientXml(p,doc);
 			// root.appendChild(root1);
 			doc.appendChild(root);
 		} catch (Exception e) {

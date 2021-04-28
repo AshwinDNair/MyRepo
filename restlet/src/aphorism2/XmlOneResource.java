@@ -53,7 +53,7 @@ public class XmlOneResource extends ServerResource {
 			dom = new DomRepresentation(MediaType.TEXT_XML);
 			dom.setIndenting(true);
 			Document doc = dom.getDocument();
-			Element root = DoctorPatientUtil.getOneXml(d, doc);
+			Element root = DoctorPatientUtil.getOneXml(d, doc,false);
 			// root.appendChild(root1);
 			doc.appendChild(root);
 		} catch (Exception e) {

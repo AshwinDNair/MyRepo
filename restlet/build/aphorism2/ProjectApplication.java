@@ -64,6 +64,10 @@ public class ProjectApplication extends Application {
 		router.attach("/doctors/{id}", PlainOneResourceDoctor.class);
 		router.attach("/patients/{id}", PlainOneResourcePatient.class);
 		router.attach("/xml", XmlAllResource.class);
+		router.attach("/xml/doctors", XmlAllResourceDoctor.class);
+		router.attach("/xml/doctors/{id}", XmlOneResourceDoctor.class);
+		router.attach("/xml/patients", XmlAllResourcePatient.class);
+		router.attach("/xml/patients/{id}", XmlOneResourcePatient.class);
 		router.attach("/xml/{id}", XmlOneResource.class);
 		router.attach("/create", CreateResource.class);
 		router.attach("/update", UpdateResource.class);

@@ -1,5 +1,4 @@
 package aphorism2;
-
 import org.restlet.resource.Get;
 import org.restlet.resource.ServerResource;
 import org.restlet.representation.Representation;
@@ -13,10 +12,10 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.*;
 import java.io.IOException;
 
-public class XmlAllResource extends ServerResource {
+public class XmlAllResourcePatient extends ServerResource {
 	private static Logger logger = Logger.getLogger(XmlAllResource.class.getName());
 
-	public XmlAllResource() {
+	public XmlAllResourcePatient() {
 	}
 
 
@@ -31,7 +30,7 @@ public class XmlAllResource extends ServerResource {
 			dom = new DomRepresentation(MediaType.TEXT_XML);
 			dom.setIndenting(true);
 			Document doc = dom.getDocument();
-			Element root = DoctorPatientUtil.getAllXml(doc,false);
+			Element root = DoctorPatientUtil.getPatientsXml(null,doc);
 			// root.appendChild(root1);
 			doc.appendChild(root);
 		} catch (Exception e) {
