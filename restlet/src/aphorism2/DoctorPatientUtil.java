@@ -23,12 +23,20 @@ public class DoctorPatientUtil {
 
     public static Element getPatientXml(Patient p,Document doc){
         Element rootNewPatient = doc.createElement("patient");
-        Element rootPatientName = doc.createElement("name");
+        Element rootPatientName = doc.createElement("patient");
+        Element rootPatientId = doc.createElement("id");
         Element rootInsuranceNo = doc.createElement("insuranceNo");
+        Element rootDocterId = doc.createElement("docterId");
+        String id=Integer.toString(p.getDoctorId());
+        String doctorId=Integer.toString(p.getDoctorId());
+        rootPatientId.appendChild(doc.createTextNode(id));
         rootPatientName.appendChild(doc.createTextNode(p.getName()));
         rootInsuranceNo.appendChild(doc.createTextNode(p.getInsuranceNumber()));
+        rootDocterId.appendChild(doc.createTextNode(doctorId));
+        rootNewPatient.appendChild(rootPatientId);
         rootNewPatient.appendChild(rootPatientName);
         rootNewPatient.appendChild(rootInsuranceNo);
+        rootNewPatient.appendChild(rootDocterId);
         return rootNewPatient;
     }
     public static Element getPatientsXml(Doctor d,Document doc){
@@ -49,9 +57,17 @@ public class DoctorPatientUtil {
     public static Element getOneXml(Doctor d, Document doc,boolean isDoctorOnly) {
         try {
             Element root = doc.createElement("doctor");
+            Element rootDocId = doc.createElement("id");
             Element rootDocName = doc.createElement("name");
+            Element rootDocPatientNum = doc.createElement("patientNumber");
+            String doctorId=Integer.toString(d.getId());
+            String patientNumberStr=Integer.toString(d.getPatientCount());
+            rootDocId.appendChild(doc.createTextNode(doctorId));
             rootDocName.appendChild(doc.createTextNode(d.getName()));
+            rootDocPatientNum.appendChild(doc.createTextNode(patientNumberStr));
+            root.appendChild(rootDocId);
             root.appendChild(rootDocName);
+            root.appendChild(rootDocPatientNum);
             if(isDoctorOnly==false)
             root.appendChild(getPatientsXml(d,doc));
             root1 = root;
