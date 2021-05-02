@@ -10,6 +10,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 
 public class PlainOneResourcePatient extends ServerResource {
+    //to represent an individual Patient  details based on id in plain text format(without doctor details)
 CopyOnWriteArrayList<Patient> patients;
 int id;
     public PlainOneResourcePatient() { }

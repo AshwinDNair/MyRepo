@@ -12,7 +12,7 @@ public class Main {
 	component.getServers().add(Protocol.HTTP, 8182);  
 	
 	// Attach the application.  
-	component.getDefaultHost().attach("/adages", new ProjectApplication());  
+	component.getDefaultHost().attach("/drpatient", new ProjectApplication());  
 	
 	// Start the web server.  
 	component.start();  

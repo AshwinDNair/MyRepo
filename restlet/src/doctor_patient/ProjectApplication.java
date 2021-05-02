@@ -12,12 +12,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class ProjectApplication extends Application {
 	@Override
 	public synchronized Restlet createInboundRoot() {
-		// To illlustrate the different API possibilities, implement the
-		// DELETE operation as an anonymous Restlet class. For the
-		// remaining operations, follow Restlet best practices and
-		// implement each as a Java class.
-
-		// DELETE Doctor handler
+		
 		Restlet janitor = new Restlet(getContext()) {
 			public void handle(Request request, Response response) {
 				String msg = null;
@@ -33,11 +28,10 @@ public class ProjectApplication extends Application {
 					msg = badRequest("Ill-formed ID.\n");
 				}
 
-				Doctor doctor = Doctors.find(id);
+				Doctor doctor = Doctors.find(id);				// find the doctor whose id has been passed as parameter
 				CopyOnWriteArrayList<Patient> patients = Patients.getList();
 				for (Patient patient : patients) {
 					if (patient.getDoctorId() == (doctor.getId())) {
-						// found it!
 						Patients.getList().remove(patient);
 					}
 				}
@@ -45,9 +39,9 @@ public class ProjectApplication extends Application {
 				if (doctor == null)
 					msg = badRequest("No doctor with ID " + id + "\n");
 				else {
-					Doctors.getList().remove(doctor);
-					DoctorPatientUtil.writeDoctorFile();
-					DoctorPatientUtil.writePatientFile();
+					Doctors.getList().remove(doctor);		//removing the doctor object from the Doctor Array List
+					//DoctorPatientUtil.writeDoctorFile();  updating the drs.db file has been disabled
+					//DoctorPatientUtil.writePatientFile();  updating the patients.db file has been disabled
 					msg = "Doctor with Id:" + id + " removed.\n";
 				}
 
@@ -56,7 +50,7 @@ public class ProjectApplication extends Application {
 			}
 		};
 
-		// Create the routing table.
+		// Create the routing table for various apis in DoctorPatient Information Service.
 		Router router = new Router(getContext());
 		router.attach("/", PlainResource.class);
 		router.attach("/doctors", PlainResourceDoctor.class);

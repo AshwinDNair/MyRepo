@@ -9,7 +9,9 @@ import org.restlet.data.MediaType;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 
-public class PlainOneResourceDoctor extends ServerResource {
+public class PlainOneResourceDoctor extends ServerResource { 
+    //to represent an individual Doctor details based on id in plain text format(without patient details)
+
 CopyOnWriteArrayList<Doctor> doctors;
 CopyOnWriteArrayList<Patient> patients;
 int id;

@@ -35,15 +35,15 @@ public class UpdateResource extends ServerResource {
 		
 		else {
 			try{
-				int id = Integer.parseInt(sid.trim());
-			Doctor doctor = Doctors.find(id);
+				int id = Integer.parseInt(sid.trim());		//retrieve doctor id from argument
+			Doctor doctor = Doctors.find(id);				// find doctor with id passed as argument
 			if (doctor == null) {
 			msg = "There is no doctor with ID " + id + "\n";
 			status = Status.CLIENT_ERROR_BAD_REQUEST;
 			}
 			else {
-				doctor.setName(name);
-				DoctorPatientUtil.writeDoctorFile();
+				doctor.setName(name);				//update the doctor name
+			//	DoctorPatientUtil.writeDoctorFile();		updating the drs.db file has been disabled
 			msg = "Id: " + id + " has been updated to '" + name + "'.\n";
 			status = Status.SUCCESS_OK;
 			}

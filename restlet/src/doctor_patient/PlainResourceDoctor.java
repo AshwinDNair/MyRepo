@@ -8,7 +8,8 @@ import org.restlet.data.Status;
 import org.restlet.data.MediaType;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class PlainResourceDoctor extends ServerResource {
+public class PlainResourceDoctor extends ServerResource { //to represent all doctors in plain text format
+
 CopyOnWriteArrayList<Doctor> doctors;
 
     public PlainResourceDoctor() { }

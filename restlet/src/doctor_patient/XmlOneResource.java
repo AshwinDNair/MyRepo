@@ -12,19 +12,10 @@ import org.restlet.data.MediaType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/*
-<doctor>
-	<name></name>
-	<patients>
-		<patient>
-			<name></name>
-			<insuranceNo></insuranceNo>
-		</patient>
-		...
-	</patients>
-</doctor>
-*/
+
 public class XmlOneResource extends ServerResource {
+	//to represent an individual Doctor details based on id and his assigned patients in XML format
+
 	public XmlOneResource() {
 	}
 

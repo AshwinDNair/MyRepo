@@ -13,7 +13,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.logging.*;
 import java.io.IOException;
 
-public class XmlAllResource extends ServerResource {
+public class XmlAllResource extends ServerResource {			
+	// to represent all doctors and his assigned patients in XML format
+
 	private static Logger logger = Logger.getLogger(XmlAllResource.class.getName());
 
 	public XmlAllResource() {
@@ -22,9 +24,6 @@ public class XmlAllResource extends ServerResource {
 
 	@Get
 	public Representation toXml() throws Exception {
-
-		CopyOnWriteArrayList<Patient> patients;
-		patients = Patients.getList();
 
 		DomRepresentation dom = null;
 		try {

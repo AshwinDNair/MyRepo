@@ -23,12 +23,10 @@ public class Patients {
 	}
     }
 
-  public static void populate() { 
+  public static void populate() {         // to initialize the Patients ArrayList with data retrieved from the patients.db
     try {
-    //  String path = Paths.get("").toAbsolutePath().toString();
-     // System.out.println("Working Directory = ======================" + path);
+  
       File myObj = new File("../webapps/drpatient/WEB-INF/data/patients.db");
-      //File myObj = new File("/Users/ashwinnair/Desktop/University Of Illinois Springfield/Web Services/TermProject/RestletDrPatientRepo/restlet/src/doctor_patient/patients.db");
       Scanner myReader = new Scanner(myObj);
       while (myReader.hasNextLine()) {
         String record = myReader.nextLine();
@@ -42,14 +40,14 @@ public class Patients {
     }
   }
      
-    public static String toPlain() {
+    public static String toPlain() {      //to represent all the  patients in the Patients ArrayList in plain text format
 	String retval = "";
 	int i = 1;
 	for (Patient patient : patients) retval += patient.toString() + "\n";
 	return retval;
     }
     
-    public static CopyOnWriteArrayList<Patient> getList() { return patients; }
+    public static CopyOnWriteArrayList<Patient> getList() { return patients; }    //to list all the  patients  in the Patients ArrayList
 
     // Support GET one operation	.
     public static Patient find(int id) {
@@ -64,7 +62,7 @@ public class Patients {
     }
 
     // Support POST operation.
-    public static void add(int Id,String name,String insuranceNum,int docterId) {
+    public static void add(int Id,String name,String insuranceNum,int docterId) {     //to add patient details to the Patients ArrayList
 	Patient patient = new Patient();
 	patient.setName(name);
 	patient.setInsuranceNumber(insuranceNum);

@@ -22,6 +22,7 @@ public class DoctorPatientUtil {
 
 
     public static Element getPatientXml(Patient p,Document doc){
+        //patient tag of xml formatted data on retriving the patient and documents as arguments
         Element rootNewPatient = doc.createElement("patient");
         Element rootPatientName = doc.createElement("patient");
         Element rootPatientId = doc.createElement("id");
@@ -40,10 +41,11 @@ public class DoctorPatientUtil {
         return rootNewPatient;
     }
     public static Element getPatientsXml(Doctor d,Document doc){
+         //patients tag of xml formatted data on retriving the doctor and documents as arguments
         Element rootPatients = doc.createElement("patients");
         
         for (Patient p : patients) {
-            if(d==null){
+            if(d==null){                //if no doctor object is passes return all patients
                 rootPatients.appendChild(getPatientXml(p, doc));  
             }
             else
@@ -54,7 +56,15 @@ public class DoctorPatientUtil {
         }
         return rootPatients;
     }
+
+
+ 
+
+
+
     public static Element getOneXml(Doctor d, Document doc,boolean isDoctorOnly) {
+        //if isDoctorOnly =false =>returns xml formatted doctor whose object is passed as  parameter along with assigned patients
+        //isDoctorOnly =true =>returns xml formatted doctor whose object is passed as parameter 
         try {
             Element root = doc.createElement("doctor");
             Element rootDocId = doc.createElement("id");
@@ -78,7 +88,9 @@ public class DoctorPatientUtil {
         return root1;
     }
 
-    public static Element getAllXml(Document doc,boolean isDoctorOnly) {
+    public static Element getAllXml(Document doc,boolean isDoctorOnly) {    
+        //if isDoctorOnly =false =>returns xml formatted doctors and assigned patients
+        //      if isDoctorOnly =true =>returns xml formatted doctors only
         try {
             Element doctorsRoot = doc.createElement("doctors");
             for (Doctor d : doctors) {
@@ -94,7 +106,7 @@ public class DoctorPatientUtil {
         return root1;
     }
 
-    public static void writeDoctorFile() {
+    public static void writeDoctorFile() {          //write into Doctor File
         String output = null;
         File file = new File(
                 "../webapps/drpatient/WEB-INF/data/drs.db");
@@ -110,7 +122,7 @@ public class DoctorPatientUtil {
 
         }
     }
-        public static void writePatientFile() {
+        public static void writePatientFile() {              //write into Patient File
             String output = null;
             File file = new File(
                     "../webapps/drpatient/WEB-INF/data/patients.db");

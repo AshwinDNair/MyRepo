@@ -13,6 +13,9 @@ import java.util.logging.*;
 import java.io.IOException;
 
 public class XmlAllResourceDoctor extends ServerResource {
+	//to represent all doctors in XML format
+ 
+
 	private static Logger logger = Logger.getLogger(XmlAllResource.class.getName());
 
 	public XmlAllResourceDoctor() {

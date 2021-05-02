@@ -13,6 +13,7 @@ import java.util.logging.*;
 import java.io.IOException;
 
 public class XmlAllResourcePatient extends ServerResource {
+	//to represent all patients in XML format
 	private static Logger logger = Logger.getLogger(XmlAllResource.class.getName());
 
 	public XmlAllResourcePatient() {

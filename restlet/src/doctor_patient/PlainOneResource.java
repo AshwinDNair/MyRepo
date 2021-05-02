@@ -14,7 +14,7 @@ CopyOnWriteArrayList<Patient> patients;
 int id;
     public PlainOneResource() { }
     @Get
-    public Representation toIndividualPlain() {
+    public Representation toIndividualPlain() {         //  to represent an individual Doctor details based on id and his assigned patients in plain text format
    // Extract the friend's id.
 	String sid = (String) getRequest().getAttributes().get("id");
 	if (sid == null) 

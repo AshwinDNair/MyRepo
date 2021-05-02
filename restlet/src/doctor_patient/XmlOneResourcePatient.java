@@ -12,6 +12,7 @@ import org.restlet.data.MediaType;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 public class XmlOneResourcePatient extends ServerResource {
+	//to represent an individual Patient  details based on id in plain text format(without doctor details)
 	public XmlOneResourcePatient() {
 	}
 
